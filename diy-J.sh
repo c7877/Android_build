@@ -8,7 +8,7 @@ cd $CURRENT_DIR/$DIR
 #名称修改
 sed -i 's/TVBox/X影视/g' $CURRENT_DIR/$DIR/app/src/main/res/values/strings.xml
 #背景修改
-mv $CURRENT_DIR/DIY/app_bg.png $CURRENT_DIR/$DIR/app/src/main/res/drawable/app_bg.png
+
 #取消选集全屏
 sed -i 's/if (showPreview \&\& !fullWindows) toggleFullPreview/\/\/if (showPreview \&\& !fullWindows) toggleFullPreview/g' $CURRENT_DIR/$DIR/app/src/main/java/com/github/tvbox/osc/ui/activity/DetailActivity.java
 #缩略图清晰度修改
