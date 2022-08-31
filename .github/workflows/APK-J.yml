@@ -1,4 +1,4 @@
-name: APK-J Build
+name: jun Build
 
 on:
 #  push:
@@ -36,5 +36,5 @@ jobs:
       - name: Upload App To Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: com.github.tvbox.osc
+          name: jun
           path: ${{ github.workspace }}/apk/*
