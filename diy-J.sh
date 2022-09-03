@@ -40,4 +40,11 @@ sed -i '/public Spider getCSP(SourceBean sourceBean)/a\        if (sourceBean.ge
 sed -i '/public Object\[\] proxyLocal(Map param)/a\        try {\n        if(param.containsKey(\"api\")){\n            String doStr = param.get(\"do\").toString();\n            if(doStr.equals(\"ck\"))\n                return PythonLoader.getInstance().proxyLocal(\"\",\"\",param);\n' $CURRENT_DIR/$DIR/app/src/main/java/com/github/tvbox/osc/api/ApiConfig.java
 sed -i '/return jarLoader.proxyInvoke/i\            SourceBean sourceBean = ApiConfig.get().getSource(doStr);\n            return PythonLoader.getInstance().proxyLocal(sourceBean.getKey(),sourceBean.getExt(),param);\n        }\n    } catch (Exception e) {\n        e.printStackTrace();\n    }' $CURRENT_DIR/$DIR/app/src/main/java/com/github/tvbox/osc/api/ApiConfig.java
 
+mv $CURRENT_DIR/DIY/libijkffmpeg.so $CURRENT_DIR/$DIR/player/src/main/jniLibs/armeabi-v7a/libijkffmpeg.so
+
+mv $CURRENT_DIR/DIY/libijksdl.so $CURRENT_DIR/$DIR/player/src/main/jniLibs/armeabi-v7a/libijksdl.so
+
+mv $CURRENT_DIR/DIY/libplayer.so $CURRENT_DIR/$DIR/player/src/main/jniLibs/armeabi-v7a/libplayer.so
+
+sed -i '/libLoader.loadLibrary(\"player\");                /i\try {\n                    libLoader.loadLibrary(\"ijkffmpeg\");\n                    libLoader.loadLibrary(\"ijksdl\");\n                } catch (Throwable throwable) {\n\n                }' $CURRENT_DIR/$DIR/player/src/main/java/tv/danmaku/ijk/media/player/IjkMediaPlayer.java
 echo 'DIY end'
