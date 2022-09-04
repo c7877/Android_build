@@ -6,9 +6,9 @@ num=$(find $CURRENT_DIR -name gradlew  | awk -F"/" '{print NF-1}')
 DIR=$(find $CURRENT_DIR -name gradlew  | cut -d \/ -f$num)
 cd $CURRENT_DIR/$DIR
 #名称修改
-sed -i 's/TVBox/X影视/g' $CURRENT_DIR/$DIR/app/src/main/res/values/strings.xml
+sed -i 's/TVBox/极影视/g' $CURRENT_DIR/$DIR/app/src/main/res/values/strings.xml
 #背景修改
-
+mv $CURRENT_DIR/DIY/app_bg.png $CURRENT_DIR/$DIR/app/src/main/res/drawable/app_bg.png
 #取消选集全屏
 sed -i 's/if (showPreview \&\& !fullWindows) toggleFullPreview/\/\/if (showPreview \&\& !fullWindows) toggleFullPreview/g' $CURRENT_DIR/$DIR/app/src/main/java/com/github/tvbox/osc/ui/activity/DetailActivity.java
 #缩略图清晰度修改
@@ -40,11 +40,4 @@ sed -i '/public Spider getCSP(SourceBean sourceBean)/a\        if (sourceBean.ge
 sed -i '/public Object\[\] proxyLocal(Map param)/a\        try {\n        if(param.containsKey(\"api\")){\n            String doStr = param.get(\"do\").toString();\n            if(doStr.equals(\"ck\"))\n                return PythonLoader.getInstance().proxyLocal(\"\",\"\",param);\n' $CURRENT_DIR/$DIR/app/src/main/java/com/github/tvbox/osc/api/ApiConfig.java
 sed -i '/return jarLoader.proxyInvoke/i\            SourceBean sourceBean = ApiConfig.get().getSource(doStr);\n            return PythonLoader.getInstance().proxyLocal(sourceBean.getKey(),sourceBean.getExt(),param);\n        }\n    } catch (Exception e) {\n        e.printStackTrace();\n    }' $CURRENT_DIR/$DIR/app/src/main/java/com/github/tvbox/osc/api/ApiConfig.java
 
-mv $CURRENT_DIR/DIY/libijkffmpeg.so $CURRENT_DIR/$DIR/player/src/main/jniLibs/armeabi-v7a/libijkffmpeg.so
-
-mv $CURRENT_DIR/DIY/libijksdl.so $CURRENT_DIR/$DIR/player/src/main/jniLibs/armeabi-v7a/libijksdl.so
-
-mv $CURRENT_DIR/DIY/libplayer.so $CURRENT_DIR/$DIR/player/src/main/jniLibs/armeabi-v7a/libplayer.so
-
-sed -i '/libLoader.loadLibrary(\"player\");                /i\try {\n                    libLoader.loadLibrary(\"ijkffmpeg\");\n                    libLoader.loadLibrary(\"ijksdl\");\n                } catch (Throwable throwable) {\n\n                }' $CURRENT_DIR/$DIR/player/src/main/java/tv/danmaku/ijk/media/player/IjkMediaPlayer.java
 echo 'DIY end'
