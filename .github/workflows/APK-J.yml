@@ -1,4 +1,4 @@
-name: jun Build
+name: APK-J Build
 
 on:
 #  push:
@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Clone Project
-        run: git clone -b main --depth=1 https://github.com/c7877/jun.git
+        run: git clone -b main --depth=1 https://github.com/q215613905/TVBoxOS.git
       - name: DIY
         run: |
           chmod +x diy-J.sh
@@ -36,5 +36,6 @@ jobs:
       - name: Upload App To Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: jun
+          name: com.github.tvbox.osc
           path: ${{ github.workspace }}/apk/*
+
